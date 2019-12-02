@@ -1,28 +1,28 @@
 on: push
-name: Demo Github actions build & Deploy
+name: Demo Github actions & Deploy
 jobs:
   build-and-publish:
     name: build and publish
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@master
       - name: npm install
         uses: actions/npm@master
-        with: 
+        with:
           args: install
       - name: npm test
         uses: actions/npm@master
-        with: 
+        with:
           args: run test
       - name: docker build
         uses: actions/docker/cli@master
-        with: 
+        with:
           args: build -t muhfaridzia/demo-github-action-react-app .
       - name: docker login
         uses: actions/docker/login@master
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       - name: docker push
         uses: actions/docker/cli@master
         with:
