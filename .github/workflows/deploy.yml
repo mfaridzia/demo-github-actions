@@ -1,5 +1,5 @@
 on: push
-name: Demo Github actions & Deploy
+name: Demo Github Actions Build & Deploy
 jobs:
   build-and-publish:
     name: build and publish
@@ -7,11 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: npm install
-        uses: actions/npm@v1
+        uses: actions/setup-node@v1
         with:
           args: install
       - name: npm test
-        uses: actions/npm@v1
+        uses: actions/setup-node@v1
         with:
           args: run test
       - name: docker build
